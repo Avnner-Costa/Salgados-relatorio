@@ -32,20 +32,44 @@ function calcular(){
 
     linhas.forEach(linha => {
 
-        let qtd = parseFloat(linha.cells[1].querySelector("input").value) || 0;
-        let valor = parseFloat(linha.cells[2].querySelector("input").value) || 0;
+        let qtd =
+        parseFloat(
+            linha.cells[1]
+            .querySelector("input").value
+        ) || 0;
+
+        let unitario =
+        parseFloat(
+            linha.cells[2]
+            .querySelector("input").value
+        ) || 0;
+
+        let totalPedido = qtd * unitario;
+
+        linha.cells[3].innerText =
+        totalPedido.toLocaleString(
+            "pt-BR",
+            {
+                style:"currency",
+                currency:"BRL"
+            }
+        );
 
         qtdTotal += qtd;
-        valorTotal += valor;
+        valorTotal += totalPedido;
     });
 
-    document.getElementById("totalQtd").innerText = qtdTotal;
+    document.getElementById("totalQtd").innerText =
+    qtdTotal;
 
     document.getElementById("totalValor").innerText =
-        valorTotal.toLocaleString("pt-BR", {
+    valorTotal.toLocaleString(
+        "pt-BR",
+        {
             style:"currency",
             currency:"BRL"
-        });
+        }
+    );
 }
 
 function gerarPDF() {
@@ -197,4 +221,40 @@ function gerarPDF() {
     );
 }
 
-adicionarLinha();
+function adicionarLinha() {
+
+    let tbody = document.getElementById("corpoTabela");
+
+    let linha = document.createElement("tr");
+
+    linha.innerHTML = `
+        <td>
+            <input type="date" onchange="calcular()">
+        </td>
+
+        <td>
+            <input type="number" min="0"
+            onchange="calcular()">
+        </td>
+
+        <td>
+            <input type="number"
+            step="0.01"
+            min="0"
+            onchange="calcular()">
+        </td>
+
+        <td class="valorTotalPedido">
+            R$ 0,00
+        </td>
+
+        <td>
+            <button class="excluir"
+            onclick="removerLinha(this)">
+                X
+            </button>
+        </td>
+    `;
+
+    tbody.appendChild(linha);
+}
