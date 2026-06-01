@@ -92,7 +92,7 @@ function gerarPDF() {
     doc.text("BENDITA SALGADOS", 105, 15, { align: "center" });
 
     doc.setFontSize(11);
-    doc.text("Relatório Quinzenal de Pedidos", 105, 23, {
+    doc.text("Relatório de Pedidos", 105, 23, {
         align: "center"
     });
 
