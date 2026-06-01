@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Pedidos</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+    
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Relatório de Pedidos</h1>
+
+    <div class="card">
+
+        <label>Cliente</label>
+        <input type="text" id="cliente">
+
+        <div class="datas">
+            <div>
+                <label>Data Inicial</label>
+                <input type="date" id="inicio">
+            </div>
+
+            <div>
+                <label>Data Final</label>
+                <input type="date" id="fim">
+            </div>
+        </div>
+
+        <h2>Pedidos</h2>
+
+        <table id="tabela">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Quantidade</th>
+                    <th>Valor (R$)</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody id="corpoTabela"></tbody>
+        </table>
+
+        <button class="btn-add" onclick="adicionarLinha()">
+            + Adicionar Pedido
+        </button>
+
+        <div class="resumo">
+            <div>
+                <strong>Total de Unidades:</strong>
+                <span id="totalQtd">0</span>
+            </div>
+
+            <div>
+                <strong>Valor Total:</strong>
+                <span id="totalValor">R$ 0,00</span>
+            </div>
+        </div>
+
+        <button class="btn-pdf" onclick="gerarPDF()">
+            Gerar PDF
+        </button>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
